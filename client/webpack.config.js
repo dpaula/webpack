@@ -29,10 +29,14 @@ plugins.push(new webpack.optimize.CommonsChunkPlugin({
     filename: 'vendor.bundle.js'
 }));
 
+let SERVICE_URL = JSON.stringify('http://localhost:3000');
+
 plugins.push(new extractTextPlugin('styles.css'));
 
 //process acessa todas as variaveis de ambiente do node
 if (process.env.NODE_ENV == 'production') {
+    
+    SERVICE_URL = JSON.stringify('http://endereco_producao:porta');
 
     //otimiza o parse dos módulos
     plugins.push(new webpack.optimize.ModuleConcatenationPlugin());
@@ -52,6 +56,8 @@ if (process.env.NODE_ENV == 'production') {
         }
     }));
 }
+
+plugins.push(new webpack.DefinePlugin({ SERVICE_URL }));
 
 //modulo do node configurável
 module.exports = {
