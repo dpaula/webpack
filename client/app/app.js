@@ -23,7 +23,7 @@ System.register(['./controllers/NegociacaoController.js', './domain/index.js'], 
                 body
             };
 
-            fetch('/negociacoes', config).then(() => console.log('Dado enviado com sucesso'));
+            fetch('http://localhost:3000/negociacoes', config).then(() => console.log('Dado enviado com sucesso'));
         }
     };
 });

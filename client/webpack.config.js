@@ -17,7 +17,9 @@ module.exports = {
     output: {
         filename: 'bundle.js',
         //caminho atual + dist
-        path: path.resolve(__dirname, 'dist')
+        path: path.resolve(__dirname, 'dist'),
+        //definindo o caminho publico do bundle como 'dist/bundle.js'
+        publicPath: 'dist'
     }, 
 
     module: {
