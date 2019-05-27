@@ -2,6 +2,7 @@ const path = require('path');
 
 const babiliPlugin = require('babili-webpack-plugin');
 const extractTextPlugin = require('extract-text-webpack-plugin');
+const optimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin');
 
 let plugins = [];
 
@@ -10,6 +11,15 @@ plugins.push(new extractTextPlugin('styles.css'));
 //process acessa todas as variaveis de ambiente do node
 if (process.env.NODE_ENV == 'production') {
     plugins.push(new babiliPlugin());
+    plugins.push(new optimizeCssAssetsWebpackPlugin({
+        cssProcessor: require('cssnano'),
+        cssProcessorOptions: {
+            discardComments: {
+                removeAll: true
+            },
+            canPrint: true
+        }
+    }));
 }
 
 //modulo do node configurável
