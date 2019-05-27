@@ -9,5 +9,18 @@ module.exports = {
         filename: 'bundle.js',
         //caminho atual + dist
         path: path.resolve(__dirname, 'dist')
+    }, 
+
+    module: {
+        rules: [
+            {
+                //expressão regular dizendo pra pegar todos os arquivos js (*.js)
+                test: /\.js$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'babel-loader'
+                }
+            }
+        ]
     }
 }
