@@ -4,8 +4,20 @@ const babiliPlugin = require('babili-webpack-plugin');
 const extractTextPlugin = require('extract-text-webpack-plugin');
 const optimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin');
 const webpack = require('webpack');
+const htmlWebpackPlugin = require('html-webpack-plugin');
 
 let plugins = [];
+
+plugins.push(new htmlWebpackPlugin({
+    hash: true,
+    minify: {
+        html5: true,
+        collapseWhitespace: true,
+        removeComments: true
+    },
+    filename: 'index.html',
+    template: __dirname + '/main.html'
+}));
 
 plugins.push(new webpack.ProvidePlugin({
     '$': 'jquery/dist/jquery.js',
@@ -53,9 +65,7 @@ module.exports = {
     output: {
         filename: 'bundle.js',
         //caminho atual + dist
-        path: path.resolve(__dirname, 'dist'),
-        //definindo o caminho publico do bundle como 'dist/bundle.js'
-        publicPath: 'dist'
+        path: path.resolve(__dirname, 'dist')
     },
 
     module: {
