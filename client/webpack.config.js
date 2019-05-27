@@ -16,13 +16,21 @@ plugins.push(new extractTextPlugin('styles.css'));
 
 //process acessa todas as variaveis de ambiente do node
 if (process.env.NODE_ENV == 'production') {
+
+    //otimiza o parse dos módulos
+    plugins.push(new webpack.optimize.ModuleConcatenationPlugin());
+
+    //para mimificar o js
     plugins.push(new babiliPlugin());
+    //para mimificar separado o css com cssnano
     plugins.push(new optimizeCssAssetsWebpackPlugin({
         cssProcessor: require('cssnano'),
         cssProcessorOptions: {
+            //remove comentarios da mimificação
             discardComments: {
                 removeAll: true
             },
+            //abilita saida de erro no console
             canPrint: true
         }
     }));
